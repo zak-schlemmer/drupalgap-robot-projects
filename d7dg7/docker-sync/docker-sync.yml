@@ -1,0 +1,9 @@
+version: "2"
+options:
+  verbose: false
+syncs:
+  d7dg7-sync:
+    src: '~/robot.dev/d7dg7/'
+    sync_userid: '1000'
+    sync_prefer: 'default'
+    watch_excludes: ['.*/.git', '.idea', '.gitignore', '.swp']

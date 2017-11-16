@@ -1,0 +1,50 @@
+version: '2'
+
+networks:
+  net:
+    driver: bridge
+    ipam:
+      config:
+      - subnet: 172.72.72.0/24
+        gateway: 172.72.72.1
+
+
+services:
+
+  # mysql
+  d7dg7-db:
+    hostname: d7dg7-db
+    container_name: d7dg7_db_1
+    image: d7dg7/db
+    build:
+      context: /etc/robot/
+      dockerfile: "./projects/drupalgap/d7dg7/mysql/Dockerfile"
+    restart: always
+    ports:
+      - "3401:3401"
+    environment:
+       MYSQL_ROOT_PASSWORD: root
+       MYSQL_DATABASE: d7dg7
+       MYSQL_USER: d7dg7
+       MYSQL_PASSWORD: robot
+    networks:
+      net:
+        ipv4_address: 172.72.72.13
+
+  # apache2/php
+  d7dg7-web:
+    hostname: d7dg7-web
+    container_name: d7dg7_web_1
+    image: d7dg7/web
+    build:
+      context: /etc/robot
+      dockerfile: "./projects/drupalgap/d7dg7/apache2/Dockerfile"
+    restart: always
+    volumes:
+      - ~/robot.dev/d7dg7:/d7dg7
+    links:
+      - d7dg7-db
+    command: apache2ctl -D FOREGROUND
+    networks:
+      net:
+        ipv4_address: 172.72.72.14
