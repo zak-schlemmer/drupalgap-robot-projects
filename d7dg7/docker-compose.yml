@@ -29,7 +29,7 @@ services:
        MYSQL_PASSWORD: robot
     networks:
       net:
-        ipv4_address: 172.72.72.13
+        ipv4_address: 172.72.72.120
 
   # apache2/php
   d7dg7-web:
@@ -47,4 +47,4 @@ services:
     command: apache2ctl -D FOREGROUND
     networks:
       net:
-        ipv4_address: 172.72.72.14
+        ipv4_address: 172.72.72.121

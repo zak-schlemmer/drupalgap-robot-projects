@@ -33,7 +33,7 @@ RUN apt update && DEBIAN_FRONTEND=noninteractive apt install -y \
 RUN mkdir /opt/go && export GOPATH=/opt/go && go get github.com/mailhog/mhsendmail
 
 # put the vhost in there
-COPY ./projects/custom/d7dg7/apache2/d7dg7.apache2.vhost.conf /etc/apache2/sites-available/d7dg7.robot
+COPY ./projects/drupalgap/d7dg7/apache2/d7dg7.apache2.vhost.conf /etc/apache2/sites-available/d7dg7.robot
 
 # symlink to sites-enabled
 RUN ln -s /etc/apache2/sites-available/d7dg7.robot /etc/apache2/sites-enabled/010-d7dg7.robot.conf
@@ -42,7 +42,7 @@ RUN ln -s /etc/apache2/sites-available/d7dg7.robot /etc/apache2/sites-enabled/01
 RUN rm /var/www/html/index.html
 
 # listen on port 8181
-COPY ./projects/custom/d7dg7/apache2/d7dg7.apache2.ports.conf /etc/apache2/ports.conf
+COPY ./projects/drupalgap/d7dg7/apache2/d7dg7.apache2.ports.conf /etc/apache2/ports.conf
 
 # allow the vhost path
 RUN sed -i -e 's/Directory \/var\/www\//Directory \/d7dg7/g' /etc/apache2/apache2.conf
@@ -51,7 +51,7 @@ RUN sed -i -e 's/Directory \/var\/www\//Directory \/d7dg7/g' /etc/apache2/apache
 RUN sed -i -e 's/memory_limit = 128M/memory_limit = 512M/g' /etc/php/7.0/apache2/php.ini
 
 # add xdebug values to php.ini
-COPY ./projects/dg7/d7dg7/apache2/xdebug.php.ini /etc/php/7.0/apache2/conf.d/20-xdebug.ini
+COPY ./projects/drupalgap/d7dg7/apache2/xdebug.php.ini /etc/php/7.0/apache2/conf.d/20-xdebug.ini
 
 # robot user things
 RUN useradd -u 1000 -s /bin/bash -m robot

@@ -1,5 +1,5 @@
 # image to use
-FROM mysql:5.5
+FROM mysql:5.6
 
 # better my.cnf
 COPY ./projects/drupalgap/d7dg7/mysql/default.my.cnf /etc/mysql/my.cnf

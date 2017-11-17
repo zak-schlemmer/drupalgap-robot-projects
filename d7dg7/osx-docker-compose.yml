@@ -23,7 +23,7 @@ services:
     image: d7dg7/db
     build:
       context: /etc/robot/
-      dockerfile: "./projects/dg7/d7dg7/mysql/Dockerfile"
+      dockerfile: "./projects/drupalgap/d7dg7/mysql/Dockerfile"
     restart: always
     ports:
       - "3401:3401"
@@ -34,7 +34,7 @@ services:
        MYSQL_PASSWORD: robot
     networks:
       net:
-        ipv4_address: 172.72.72.13
+        ipv4_address: 172.72.72.120
 
   # apache2/php
   d7dg7-web:
@@ -43,7 +43,7 @@ services:
     image: d7dg7/web
     build:
       context: /etc/robot
-      dockerfile: "./projects/dg7/d7dg7/apache2/Dockerfile"
+      dockerfile: "./projects/drupalgap/d7dg7/apache2/Dockerfile"
     restart: always
     volumes:
       - d7dg7-sync:/d7dg7:rw
@@ -52,4 +52,4 @@ services:
     command: apache2ctl -D FOREGROUND
     networks:
       net:
-        ipv4_address: 172.72.72.14
+        ipv4_address: 172.72.72.121
