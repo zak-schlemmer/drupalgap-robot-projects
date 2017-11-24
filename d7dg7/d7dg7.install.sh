@@ -40,7 +40,7 @@ docker exec -t d7dg7_web_1 bash -c "chmod +x drush.phar && mv drush.phar /usr/lo
 
 # drupal install
 echo "" && echo "Drupal Install" && echo ""
-docker exec -t d7dg7_web_1 bash -c "cd /d7dg7 && drush site-install -y standard --site-name=${1} --account-name=admin --account-pass=robot --account-mail=admin@robot.com --db-url=mysql://root:root@${1}-db:3305/${1}"
+docker exec -t d7dg7_web_1 bash -c "cd /d7dg7 && drush site-install -y standard --site-name=d7dg7 --account-name=admin --account-pass=robot --account-mail=admin@robot.com --db-url=mysql://root:root@${1}-db:3401/d7dg7"
 docker exec -t d7dg7_web_1 bash -c "cd /d7dg7 && drush cc all"
 
 # fix permissions
@@ -50,7 +50,7 @@ docker exec -t d7dg7_web_1 bash -c "chown -R robot:robot /d7dg7"
 
 # optional memcache bits
 #remove me memcache#docker exec -t d7dg7_web_1 bash -c "cd /d7dg7 && drush en -y memcache"
-#remove me memcache#cat /etc/robot/projects/drupalgap/d7dg7/memcache/template.drupal7.settings.php >> ~/robot.dev/${1}/sites/default/settings.php
+#remove me memcache#cat /etc/robot/projects/drupalgap/d7dg7/memcache/template.drupal7.settings.php >> ~/robot.dev/d7dg7/sites/default/settings.php
 #remove me memcache#docker exec -t d7dg7_web_1 bash -c "cd /d7dg7 && drush en -y memcache_admin"
 
 # everything done
